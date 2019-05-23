@@ -158,31 +158,31 @@ function formatExtensibleAttachment(attachment) {
           ? null
           : attachment.story_attachment.media.animated_image == null &&
             attachment.story_attachment.media.image == null
-            ? null
-            : (
-                attachment.story_attachment.media.animated_image ||
-                attachment.story_attachment.media.image
-              ).uri,
+          ? null
+          : (
+              attachment.story_attachment.media.animated_image ||
+              attachment.story_attachment.media.image
+            ).uri,
       width:
         attachment.story_attachment.media == null
           ? null
           : attachment.story_attachment.media.animated_image == null &&
             attachment.story_attachment.media.image == null
-            ? null
-            : (
-                attachment.story_attachment.media.animated_image ||
-                attachment.story_attachment.media.image
-              ).width,
+          ? null
+          : (
+              attachment.story_attachment.media.animated_image ||
+              attachment.story_attachment.media.image
+            ).width,
       height:
         attachment.story_attachment.media == null
           ? null
           : attachment.story_attachment.media.animated_image == null &&
             attachment.story_attachment.media.image == null
-            ? null
-            : (
-                attachment.story_attachment.media.animated_image ||
-                attachment.story_attachment.media.image
-              ).height,
+          ? null
+          : (
+              attachment.story_attachment.media.animated_image ||
+              attachment.story_attachment.media.image
+            ).height,
       playable:
         attachment.story_attachment.media == null
           ? null
@@ -230,31 +230,31 @@ function formatExtensibleAttachment(attachment) {
           ? null
           : attachment.story_attachment.media.animated_image == null &&
             attachment.story_attachment.media.image == null
-            ? null
-            : (
-                attachment.story_attachment.media.animated_image ||
-                attachment.story_attachment.media.image
-              ).uri, // @Legacy
+          ? null
+          : (
+              attachment.story_attachment.media.animated_image ||
+              attachment.story_attachment.media.image
+            ).uri, // @Legacy
       thumbnailWidth:
         attachment.story_attachment.media == null
           ? null
           : attachment.story_attachment.media.animated_image == null &&
             attachment.story_attachment.media.image == null
-            ? null
-            : (
-                attachment.story_attachment.media.animated_image ||
-                attachment.story_attachment.media.image
-              ).width, // @Legacy
+          ? null
+          : (
+              attachment.story_attachment.media.animated_image ||
+              attachment.story_attachment.media.image
+            ).width, // @Legacy
       thumbnailHeight:
         attachment.story_attachment.media == null
           ? null
           : attachment.story_attachment.media.animated_image == null &&
             attachment.story_attachment.media.image == null
-            ? null
-            : (
-                attachment.story_attachment.media.animated_image ||
-                attachment.story_attachment.media.image
-              ).height // @Legacy
+          ? null
+          : (
+              attachment.story_attachment.media.animated_image ||
+              attachment.story_attachment.media.image
+            ).height // @Legacy
     };
   } else {
     return { error: "Don't know what to do with extensible_attachment." };
@@ -395,7 +395,10 @@ function formatMessagesGraphQLResponse(data) {
         var mentionsObj = {};
         if (d.message !== null) {
           d.message.ranges.forEach(e => {
-            mentionsObj[e.entity.id] = d.message.text.substr(e.offset, e.length);
+            mentionsObj[e.entity.id] = d.message.text.substr(
+              e.offset,
+              e.length
+            );
           });
         }
 
@@ -404,11 +407,11 @@ function formatMessagesGraphQLResponse(data) {
           attachments: maybeStickerAttachment
             ? maybeStickerAttachment
             : d.blob_attachments && d.blob_attachments.length > 0
-              ? d.blob_attachments.map(formatAttachmentsGraphQLResponse)
-              : d.extensible_attachment
-                ? [formatExtensibleAttachment(d.extensible_attachment)]
-                : [],
-          body: d.message !== null ? d.message.text : '',
+            ? d.blob_attachments.map(formatAttachmentsGraphQLResponse)
+            : d.extensible_attachment
+            ? [formatExtensibleAttachment(d.extensible_attachment)]
+            : [],
+          body: d.message !== null ? d.message.text : "",
           isGroup: messageThread.thread_type === "GROUP",
           messageID: d.message_id,
           senderID: d.message_sender.id,
@@ -588,7 +591,13 @@ module.exports = function(defaultFuncs, api, ctx) {
     if (!callback) {
       throw { error: "getThreadHistoryGraphQL: need callback" };
     }
-
+    const query_params = {
+      id: threadID,
+      message_limit: amount,
+      load_messages: 1,
+      load_read_receipts: false
+    };
+    timestamp && (query_params.before = timestamp);
     // `queries` has to be a string. I couldn't tell from the dev console. This
     // took me a really long time to figure out. I deserve a cookie for this.
     var form = {
@@ -596,13 +605,7 @@ module.exports = function(defaultFuncs, api, ctx) {
         o0: {
           // This doc_id was valid on February 2nd 2017.
           doc_id: "1498317363570230",
-          query_params: {
-            id: threadID,
-            message_limit: amount,
-            load_messages: 1,
-            load_read_receipts: false,
-            before: timestamp
-          }
+          query_params
         }
       })
     };
