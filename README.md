@@ -76,6 +76,7 @@ Result:
 * [`api.listen`](DOCS.md#listen)
 * [`api.logout`](DOCS.md#logout)
 * [`api.markAsRead`](DOCS.md#markAsRead)
+* [`api.markAsReadAll`](DOCS.md#markAsReadAll)
 * [`api.muteThread`](DOCS.md#muteThread)
 * [`api.removeUserFromGroup`](DOCS.md#removeUserFromGroup)
 * [`api.resolvePhotoUrl`](DOCS.md#resolvePhotoUrl)
@@ -90,7 +91,7 @@ Result:
 ## Main Functionality
 
 ### Sending a message
-#### api.sendMessage(message, threadID[, callback])
+#### api.sendMessage(message, threadID[, callback][, messageID])
 
 Various types of message can be sent:
 * *Regular:* set field `body` to the desired message as a string.
@@ -242,7 +243,7 @@ login({appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8'))}, (err, ap
 - [Botyo](https://github.com/ivkos/botyo) - Modular bot designed for group chat rooms on Facebook
 - [matrix-puppet-facebook](https://github.com/matrix-hacks/matrix-puppet-facebook) - A facebook bridge for [matrix](https://matrix.org)
 - [facebot](https://github.com/Weetbix/facebot) - A facebook bridge for Slack.
-- [TestMyBot](https://github.com/codeforequity-at/testmybot) - Test Automation Framework for Chatbots
+- [Botium](https://github.com/codeforequity-at/botium-core) - The Selenium for Chatbots
 - [Messenger-CLI](https://github.com/AstroCB/Messenger-CLI) - A command-line interface for sending and receiving messages through Facebook Messenger.
 - [AssumeZero-Bot](https://github.com/AstroCB/AssumeZero-Bot) – A highly customizable Facebook Messenger bot for group chats.
 - [Miscord](https://github.com/Bjornskjald/miscord) - An easy-to-use Facebook bridge for Discord.

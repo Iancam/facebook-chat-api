@@ -1,7 +1,7 @@
 "use strict";
 
 var bluebird = require("bluebird");
-var request = bluebird.promisify(require("request").defaults({ jar: true }));
+var request = bluebird.promisify(require("request").defaults({ jar: true }), {multiArgs: true});
 var stream = require("stream");
 var log = require("npmlog");
 
@@ -1257,6 +1257,7 @@ module.exports = {
   parseAndCheckLogin,
   saveCookies,
   getType,
+  _formatAttachment,
   formatHistoryMessage,
   formatID,
   formatMessage,
