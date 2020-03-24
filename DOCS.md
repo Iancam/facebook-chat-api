@@ -551,6 +551,8 @@ Takes a threadID, number of messages, a timestamp, and a callback.
 
 __note__: if you're getting a 500 error, it's possible that you're requesting too many messages. Try reducing that number and see if that works.
 
+__note__: As of may 29th, 2019, max messages was 100. Requesting too many messages causes the API to load messages from the start of the thread. 
+
 __Arguments__
 * `threadID`: A threadID corresponding to the target chat
 * `amount`: The amount of messages to *request*
